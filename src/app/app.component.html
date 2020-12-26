@@ -1,20 +1,38 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Welcome to {{ title }}!
+    Solve the multiplication:
   </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <!-- <img width="300" alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="> -->
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- <h2>Solve the multiplication: </h2> -->
 
+<!-- <p>{{(current$ | async)}}</p> -->
+<div style="text-align:center">
+
+  <div *ngFor="let q of shuffledQuests; let i = index">
+    <div *ngIf="i === where">
+      <h2>
+        <p>
+          <span>{{i%2 === 0 ? q[0] : q[1]}}</span> * <span>{{i%2 === 0 ? q[1] : q[0]}}</span> = ?
+          <span><input #res (keyup)="0" [class.red]="res.value && res.value != (q[0] * q[1])"
+              [class.green]="res.value && res.value == (q[0] * q[1])"></span>
+          <span>
+            &nbsp;<button *ngIf="res.value == (q[0] * q[1])" (click)="inc()">Next</button>
+          </span>
+        </p>
+      </h2>
+      <h3>
+        {{math.floor(((i+1) / shuffledQuests.length)*100) | number }}% ({{i+1}} of {{shuffledQuests.length}})
+      </h3>
+    </div>
+  </div>
+
+  <input type="checkbox" #distime> Display time
+  <h4 *ngIf="time$ | async as time" [style.color]="distime.checked || where === shuffledQuests.length -1 ? 'inherit' : 'transparent'">
+    Time {{math.floor(time/(60*60)) | number: '2.0-0'}}:{{math.floor(time/60) | number: '2.0-0'}}:{{time%60 | number:
+    '2.0-0'}}
+  </h4>
+
+</div>
