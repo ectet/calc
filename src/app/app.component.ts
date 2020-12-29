@@ -6,7 +6,7 @@ import { from, Observable, Subject, timer } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-// interface tuple
+
 export class AppComponent {
   title = 'calc';
 
@@ -20,6 +20,8 @@ export class AppComponent {
   time$ = timer(0, 1000);
 
   math = Math;
+
+  action;
 
   // current$ = new Subject<[number, number]>();
 
