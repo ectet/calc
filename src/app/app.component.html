@@ -23,7 +23,7 @@
         <h2>
           <p>
             <span>{{i%2 === 0 ? q[0] : q[1]}}</span> * <span>{{i%2 === 0 ? q[1] : q[0]}}</span> = ?
-            <span><input autofocus] #res (keyup)="0" [class.red]="res.value && res.value != (q[0] * q[1])"
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != (q[0] * q[1])"
                 [class.green]="res.value && res.value == (q[0] * q[1])"></span>
             <span>
               &nbsp;<button *ngIf="res.value == (q[0] * q[1])" (click)="inc()">Next</button>
@@ -43,7 +43,7 @@
         <h2 *ngIf="i%2 === 0 ? q[1] : q[0] as divisor">
           <p>
             <span>{{q[0] * q[1]}}</span> / <span>{{divisor}}</span> = ?
-            <span><input autofocus #res (keyup)="0" [class.red]="res.value && res.value != (q[0] * q[1])/divisor"
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != (q[0] * q[1])/divisor"
                 [class.green]="res.value && res.value == (q[0] * q[1])/divisor"></span>
             <span>
               &nbsp;<button *ngIf="res.value == (q[0] * q[1])/divisor" (click)="inc()">Next</button>
