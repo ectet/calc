@@ -5,6 +5,8 @@
     <p *ngIf="!action">
       <input type="radio" value="mul" name="action" required [(ngModel)]="action"> Multiplication
       <input type="radio" value="div" name="action" required [(ngModel)]="action"> Division
+      <input type="radio" value="sum" name="action" required [(ngModel)]="action"> Sum
+      <input type="radio" value="sub" name="action" required [(ngModel)]="action"> Sub
     </p>
   </h1>
   <!-- <img width="300" alt="Angular Logo"
@@ -52,6 +54,46 @@
         </h2>
         <h3>
           {{math.floor(((i+1) / shuffledQuests.length)*100) | number }}% ({{i+1}} of {{shuffledQuests.length}})
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'sum'">
+    <div *ngFor="let q of shuffledPlusMin; let i = index">
+      <div *ngIf="i === where">
+        <h2>
+          <p>
+            <span>{{i%2 === 0 ? q[0] : q[1]}}</span> + <span>{{i%2 === 0 ? q[1] : q[0]}}</span> = ?
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != (q[0] + q[1])"
+                [class.green]="res.value && res.value == (q[0] + q[1])"></span>
+            <span>
+              &nbsp;<button *ngIf="res.value == (q[0] + q[1])" (click)="inc()">Next</button>
+            </span>
+          </p>
+        </h2>
+        <h3>
+          {{math.floor(((i+1) / shuffledPlusMin.length)*100) | number }}% ({{i+1}} of {{shuffledPlusMin.length}})
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'sub'">
+    <div *ngFor="let q of shuffledPlusMin; let i = index">
+      <div *ngIf="i === where">
+        <h2>
+          <p>
+            <span>{{getQ0(i, q)}}</span> - <span>{{getQ1(i, q)}}</span> = ?
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != (getQ0(i, q) - getQ1(i, q))"
+                [class.green]="res.value && res.value == (getQ0(i, q) - getQ1(i, q))"></span>
+            <span>
+              &nbsp;<button *ngIf="res.value == (getQ0(i, q) - getQ1(i, q))" (click)="inc()">Next</button>
+            </span>
+          </p>
+        </h2>
+        <h3>
+          {{math.floor(((i+1) / shuffledPlusMin.length)*100) | number }}% ({{i+1}} of {{shuffledPlusMin.length}})
         </h3>
       </div>
     </div>

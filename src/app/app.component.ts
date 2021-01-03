@@ -15,6 +15,10 @@ export class AppComponent {
   // qs = new Map<number, number[]>();
   quests: [number, number][] = [];
   shuffledQuests: [number, number][] = [];
+
+  plusMin: [number, number][] = [];
+  shuffledPlusMin: [number, number][] = [];
+
   where = 0;
 
   time$ = timer(0, 1000);
@@ -43,14 +47,30 @@ export class AppComponent {
         this.quests.push([l, r]);
       }
     }
+
+    for (let l = 2; l < 100; l++) {
+      for (let r = 2; r < 100; r++) {
+        this.plusMin.push([l, r]);
+      }
+    }
+
   }
 
   ngOnInit() {
     this.shuffledQuests = this.shuffle(this.quests);
+    this.shuffledPlusMin = this.shuffle(this.plusMin);
   }
 
   inc() {
     this.where++;
+  }
+
+  getQ0(i: number, q: [number, number]) {
+    return i%2 === 0 ? q[0] : q[1];
+  }
+
+  getQ1(i: number, q: [number, number]) {
+    return i%2 === 0 ? q[1] : q[0];
   }
 
   // floor(n) {
