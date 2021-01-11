@@ -19,6 +19,9 @@ export class AppComponent {
   plusMin: [number, number][] = [];
   shuffledPlusMin: [number, number][] = [];
 
+  fractions: [number, number, number][] = [];
+  shuffledFractions: [number, number, number][] = [];
+
   where = 0;
 
   time$ = timer(0, 1000);
@@ -54,11 +57,20 @@ export class AppComponent {
       }
     }
 
+    for (let l = 2, i = 0; l < 10; l++, i++) {
+      for (let r = 2; r < 100; r++) {
+        const l1 = i % 2 === 0 ? l : r;
+        const r1 = i % 2 !== 0 ? l : r;
+        const rand = this.getRandomArbitrary(l1);
+        this.fractions.push([rand, l1, r1]);
+      }
+    }
   }
 
   ngOnInit() {
     this.shuffledQuests = this.shuffle(this.quests);
     this.shuffledPlusMin = this.shuffle(this.plusMin);
+    this.shuffledFractions = this.shuffle(this.fractions);
   }
 
   inc() {
@@ -66,11 +78,15 @@ export class AppComponent {
   }
 
   getQ0(i: number, q: [number, number]) {
-    return i%2 === 0 ? q[0] : q[1];
+    return i % 2 === 0 ? q[0] : q[1];
   }
 
   getQ1(i: number, q: [number, number]) {
-    return i%2 === 0 ? q[1] : q[0];
+    return i % 2 === 0 ? q[1] : q[0];
+  }
+
+  getRandomArbitrary(max: number) {
+    return Math.floor(Math.random() * (max - 1) + 1);
   }
 
   // floor(n) {

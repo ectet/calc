@@ -7,6 +7,7 @@
       <input type="radio" value="div" name="action" required [(ngModel)]="action"> Division
       <input type="radio" value="sum" name="action" required [(ngModel)]="action"> Sum
       <input type="radio" value="sub" name="action" required [(ngModel)]="action"> Sub
+      <input type="radio" value="fra" name="action" required [(ngModel)]="action"> Fraction
     </p>
   </h1>
   <!-- <img width="300" alt="Angular Logo"
@@ -49,6 +50,26 @@
                 [class.green]="res.value && res.value == (q[0] * q[1])/divisor"></span>
             <span>
               &nbsp;<button *ngIf="res.value == (q[0] * q[1])/divisor" (click)="inc()">Next</button>
+            </span>
+          </p>
+        </h2>
+        <h3>
+          {{math.floor(((i+1) / shuffledQuests.length)*100) | number }}% ({{i+1}} of {{shuffledQuests.length}})
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'fra'">
+    <div *ngFor="let f of shuffledFractions; let i = index">
+      <div *ngIf="i === where">
+        <h2>
+          <p>
+            <sup>{{f[0]}}</sup>&frasl;<sub>{{f[1]}}</sub><span> of </span><span>{{f[1] * f[2]}}</span> = ?
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != f[2]*f[0]"
+                [class.green]="res.value && res.value == f[2]*f[0]"></span>
+            <span>
+              &nbsp;<button *ngIf="res.value == f[2]*f[0]" (click)="inc()">Next</button>
             </span>
           </p>
         </h2>
