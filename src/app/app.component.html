@@ -138,7 +138,7 @@
           <p *ngIf="i%2 ? rightDec(d[0] + coeff(i)*a[0]) : rightDec(a[0] + coeff(i)*d[0]) as r">
             <span style="display: none">{{r}}</span>
             <sup>{{i%2 ? d[1] : a[1]}}</sup>&frasl;<sub>{{i%2 ? d[2] : a[2]}}</sub> <span> {{i%2 ? '+' : '-'}} </span>
-            <sup>{{i%2 ? a[1] : d[1]}}</sup>&frasl;<sub>{{i%2 ? a[2] : d[2]}}</sub>
+            <sup>{{i%2 ? a[1] : d[1]}}</sup>&frasl;<sub>{{i%2 ? a[2] : d[2]}}</sub> = 
             <span><input #res (keyup)="0" [class.red]="res.value && res.value != r"
                 [class.green]="res.value && res.value == r"></span>
             <span>
