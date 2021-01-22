@@ -135,10 +135,10 @@
     <div *ngFor="let d of sDecs; let i = index">
       <div *ngIf="i === where">
         <h2 *ngIf="asDecs[i] as a">
-          <p *ngIf="i%2 ? rightDec(d[0] + coeff(i)*a[0]) : rightDec(a[0] + coeff(i)*d[0]) as r">
+          <p *ngIf="rightDec(d[0], a[0], i) as r">
             <span style="display: none">{{r}}</span>
-            <sup>{{i%2 ? d[1] : a[1]}}</sup>&frasl;<sub>{{i%2 ? d[2] : a[2]}}</sub> <span> {{i%2 ? '+' : '-'}} </span>
-            <sup>{{i%2 ? a[1] : d[1]}}</sup>&frasl;<sub>{{i%2 ? a[2] : d[2]}}</sub> = 
+            <sup>{{d[1]}}</sup>&frasl;<sub>{{d[2]}}</sub> <span> {{i%2 ? '+' : '-'}} </span>
+            <sup>{{a[1]}}</sup>&frasl;<sub>{{a[2]}}</sub> = 
             <span><input #res (keyup)="0" [class.red]="res.value && res.value != r"
                 [class.green]="res.value && res.value == r"></span>
             <span>

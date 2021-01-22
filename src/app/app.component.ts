@@ -73,11 +73,12 @@ export class AppComponent {
     }
 
     for (let i = .01; i < 5.00; i += .01) {
-      const i1 = Math.floor(i * 100) / 100;
+      // const i1 = Math.floor(i * 100) / 100;
+      const i1 = Number.parseFloat(i.toFixed(2));
       const dgd = this.getlowestfraction(i1);
       this.decs.push([i1, dgd[0], dgd[1]]);
     }
-    // console.log(JSON.stringify(this.dec));
+    console.log(JSON.stringify(this.decs));
     // for (let i = 5.01; i < 10.00; i += .01) {
     //   const i1 = Math.floor(i * 100) / 100;
     //   const dgd = this.getlowestfraction(i1);
@@ -100,8 +101,9 @@ export class AppComponent {
     this.asDecs = this.shuffle(this.decs);
   }
 
-  rightDec(n: number) {
-    return Math.floor(n * 100) / 100;
+  rightDec(d: number, a: number, i: number) {
+    const dgd = i%2 ? (d + a) : (d - a);
+    return Number.parseFloat(dgd.toFixed(2));
   }
 
   inc() {
@@ -129,8 +131,8 @@ export class AppComponent {
   }
 
   getlowestfraction(x0: number): [number, number] {
-    var eps = 1.0E-15;
-    var h, h1, h2, k, k1, k2, a, x;
+    const eps = 1.0E-15;
+    let h, h1, h2, k, k1, k2, a, x;
 
     x = x0;
     a = Math.floor(x);
