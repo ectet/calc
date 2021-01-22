@@ -2,12 +2,23 @@
 <div style="text-align:center">
   <h1>
     <p>Select:</p>
-    <p *ngIf="!action">
-      <input type="radio" value="mul" name="action" required [(ngModel)]="action"> Multiplication
-      <input type="radio" value="div" name="action" required [(ngModel)]="action"> Division
-      <input type="radio" value="sum" name="action" required [(ngModel)]="action"> Sum
-      <input type="radio" value="sub" name="action" required [(ngModel)]="action"> Sub
-      <input type="radio" value="fra" name="action" required [(ngModel)]="action"> Fraction
+    <p>
+      <span *ngIf="!action || action === 'mul'"><input type="radio" value="mul" name="action" required
+          [(ngModel)]="action"> Multiplication</span>
+      <span *ngIf="!action || action === 'div'"><input type="radio" value="div" name="action" required
+          [(ngModel)]="action"> Division</span>
+      <span *ngIf="!action || action === 'sum'"><input type="radio" value="sum" name="action" required
+          [(ngModel)]="action">
+        Sum</span>
+      <span *ngIf="!action || action === 'sub'"><input type="radio" value="sub" name="action" required
+          [(ngModel)]="action">
+        Sub</span>
+      <span *ngIf="!action || action === 'fra'"><input type="radio" value="fra" name="action" required
+          [(ngModel)]="action">
+        Fraction</span>
+      <span *ngIf="!action || action === 'dec'"><input type="radio" value="dec" name="action" required
+          [(ngModel)]="action">
+        Decimals</span>
     </p>
   </h1>
   <!-- <img width="300" alt="Angular Logo"
@@ -115,6 +126,28 @@
         </h2>
         <h3>
           {{math.floor(((i+1) / shuffledPlusMin.length)*100) | number }}% ({{i+1}} of {{shuffledPlusMin.length}})
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="action === 'dec'">
+    <div *ngFor="let d of sDecs; let i = index">
+      <div *ngIf="i === where">
+        <h2 *ngIf="asDecs[i] as a">
+          <p *ngIf="i%2 ? rightDec(d[0] + coeff(i)*a[0]) : rightDec(a[0] + coeff(i)*d[0]) as r">
+            <span style="display: none">{{r}}</span>
+            <sup>{{i%2 ? d[1] : a[1]}}</sup>&frasl;<sub>{{i%2 ? d[2] : a[2]}}</sub> <span> {{i%2 ? '+' : '-'}} </span>
+            <sup>{{i%2 ? a[1] : d[1]}}</sup>&frasl;<sub>{{i%2 ? a[2] : d[2]}}</sub>
+            <span><input #res (keyup)="0" [class.red]="res.value && res.value != r"
+                [class.green]="res.value && res.value == r"></span>
+            <span>
+              &nbsp;<button *ngIf="res.value == r" (click)="inc()">Next</button>
+            </span>
+          </p>
+        </h2>
+        <h3>
+          {{math.floor(((i+1) / sDecs.length)*100) | number }}% ({{i+1}} of {{sDecs.length}})
         </h3>
       </div>
     </div>
