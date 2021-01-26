@@ -72,13 +72,20 @@ export class AppComponent {
       }
     }
 
-    for (let i = .01; i < 5.00; i += .01) {
+    for (let i = 5.01; i < 7.5; i += .01) {
       // const i1 = Math.floor(i * 100) / 100;
       const i1 = Number.parseFloat(i.toFixed(2));
       const dgd = this.getlowestfraction(i1);
       this.decs.push([i1, dgd[0], dgd[1]]);
     }
-    console.log(JSON.stringify(this.decs));
+    for (let i = -9.99; i < -7.5; i += .01) {
+      // const i1 = Math.floor(i * 100) / 100;
+      const i1 = Number.parseFloat(i.toFixed(2));
+      const dgd = this.getlowestfraction(i1);
+      this.decs.push([i1, dgd[0], dgd[1]]);
+    }
+    // console.log(`decs ${this.decs.length}`);
+    // console.log(JSON.stringify(this.decs));
     // for (let i = 5.01; i < 10.00; i += .01) {
     //   const i1 = Math.floor(i * 100) / 100;
     //   const dgd = this.getlowestfraction(i1);
